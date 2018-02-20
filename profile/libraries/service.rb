@@ -9,13 +9,13 @@ class ServiceResource < Inspec.resource(1)
   end
 
   def exist?
-		if @params['objects']
-			@params['objects'].each do |obj|
-				if obj['kind'] == 'Service'
-					return true
-				end
-			end
-		end
-		return false
+    if @params['objects']
+      @params['objects'].each do |obj|
+        if obj['kind'] == 'Service'
+          return true
+        end
+      end
+    end
+    return false
   end
 end

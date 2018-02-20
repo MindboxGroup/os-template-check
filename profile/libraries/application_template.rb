@@ -24,10 +24,10 @@ class AppTemplate < Inspec.resource(1)
 
     # Protect from invalid YAML content
     #begin
-     # @params = YAML.load(@file.content)
-      # Add two extra matchers
-     # @params['file_size'] = @file.size
-     # @params['file_path'] = @path
+    # @params = YAML.load(@file.content)
+    # Add two extra matchers
+    # @params['file_size'] = @file.size
+    # @params['file_path'] = @path
     #rescue Exception
     #  return skip_resource "#{@file}: #{$!}"
     #end
@@ -50,7 +50,7 @@ class AppTemplate < Inspec.resource(1)
     return @params[name.to_s]
   end
 
-	def check_livenessprobe
-		return nil
-	end
+  def check_livenessprobe
+    return nil
+  end
 end

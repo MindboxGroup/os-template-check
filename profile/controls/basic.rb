@@ -6,11 +6,11 @@ control 'template' do
   desc 'Check template basic arguments'
   title 'Verify the basic fields for template'
   tag 'application'
-	tag 'template'
+  tag 'template'
 
   describe yaml('app/template.yaml') do
-    its('apiVersion') { should match('v1')}
-    its('kind') { should match('Template')}
-    its(['metadata', 'name']) { should_not be nil}
+    its('apiVersion') { should match('v1') }
+    its('kind') { should match('Template') }
+    its(['metadata', 'name']) { should_not be nil }
   end
 end
