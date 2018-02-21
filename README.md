@@ -38,12 +38,6 @@ Test Summary: 30 successful, 0 failures, 0 skipped
 
  Inspection name  | Description
 -----------------|-----
- [`basic`](profile/controls/basic.rb) | testuje czy podany plik jest faktycznie szablonem dla openshift
- [`health_check`](profile/controls/health_check.rb) | testuje czy kontener aplikacji zawiera `livenessProbe` oraz `readinessProbe`
- [`parameters`](profile/controls/parameters.rb) | testuje czy szablon zawiera wymagane parametry
- [`resources`](profile/controls/resources.rb) | testuje czy kontener ma ustawione zasoby jakie są wymagane przez aplikacje
- [`route`](profile/controls/route.rb) | testuje czy zasób `route` nie zawiera błędów
- [`service`](profile/controls/service.rb) | testuje czy zasób `service` nie zawiera błędów
  [`basic`](profile/controls/basic.rb) | tests whether the given file is actually a template for openshift
  [`health_check`](profile/controls/health_check.rb) | tests whether the application container contains `livenessProbe` and` readinessProbe`
  [`parameters`](profile/controls/parameters.rb) | tests whether the template contains the required parameters
