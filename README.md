@@ -5,11 +5,11 @@ The following repository contains the application template and the InSpec profil
 ## Application template and its testing
 
 The template may vary significantly depending on the application, so the best method for testing the template is to check whether it contains elements that are required or desired.
-For this purpose, the InSpec tool is used that allows testing of such an application template.
+For this purpose, the InSpec tool is used that allows testing of such application template.
 
 ### Testing the template
 
-The `app` directory contains the file [`template.yaml`](app/template.yaml) which can be treated as an output template for the application. In case you want to test our template, it must be located under the path `app/template.yaml`.
+The `app` directory contains the file [`template.yaml`](app/template.yaml) which can be treated as an output template for the application. In case you want to test your template, it must be located under the path `app/template.yaml`.
 
 The [InSpec](https://www.inspec.io/downloads/) tool is also required for testing .
 
