@@ -1,66 +1,68 @@
 # InSpec Profile
 
-Ten profil InSpec służy do testowania szablonu aplikacji dla openshift.
+This InSpec profile is used to test the application template for openshift.
+
 
 # Kontrola
 
-W katalogu [`controls`](controls) znajdują się pliki z definicją kontroli jaka jest przeprowadzana na szablonie. Poniżesz można znaleźć tabele z listą kontroli oraz ich opisem.
+In the [control](controls) directory there are files with the control definition that is carried out on the template. Below you can find tables with the list of controls and their description.
 
- Nazwa kontroli | Opis
+ Inspection name | Description
 -----------------|-----
- [`basic`](controls/basic.rb) | testuje czy podany plik jest faktycznie szablonem dla openshift
- [`health_check`](controls/health_check.rb) | testuje czy kontener aplikacji zawiera `livenessProbe` oraz `readinessProbe`
- [`parameters`](controls/parameters.rb) | testuje czy szablon zawiera wymagane parametry
- [`resources`](controls/resources.rb) | testuje czy kontener ma ustawione zasoby jakie są wymagane przez aplikacje
- [`route`](controls/route.rb) | testuje czy zasób `route` nie zawiera błędów
- [`service`](controls/service.rb) | testuje czy zasób `service` nie zawiera błędów
+ [`basic`](controls/basic.rb) | tests whether the given file is actually a template for openshift
+ [`health_check`](controls/health_check.rb) | tests whether the application container contains `livenessProbe` and` readinessProbe`
+ [`parameters`](controls/parameters.rb) | tests whether the template contains the required parameters
+ [`resources`](controls/resources.rb) | tests whether the container has the resources set that are required by the applications
+ [`route`](controls/route.rb) | tests whether the `route` resource contains errors
+ [`service`](controls/service.rb) | tests whether the `service` resource contains errors
 
 ## basic
 
-Kontrola `basic` sprawdza czy podany plik jest szablonem aplikacji dla openshift. 
+The `basic` control checks whether the given file is the application's template for openshift.
 
 ```yaml
-apiVersion: v1 # wersja api musi być 'v1'
-kind: Template # kind musi być 'Template'
+apiVersion: v1 #  api version must be  'v1'
+kind: Template # kind has to be 'Template'
 metadata:
-  name: our_application # nazwa szablonu nie może być pusta
+  name: our_application # template name must not be empty
 ```
 
 ## health_check
 
-Kontrola `health_check` sprawdza czy kontener zawiera check `livenessProbe` oraz `readinessProbe`.
+The health_check control checks if the container contains check `livenessProbe` and` readinessProbe`.
 
 ```yaml
 [...]
-          livenessProbe:
-            failureThreshold: 3 # wartość musi być większa od 0
-            httpGet:
-              path: /healthcheck
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 180 # wartość musi być większa od 0
-            periodSeconds: 10 # wartość musi być większa od 0
-            successThreshold: 1 # wartość musi być większa od 0
-            timeoutSeconds: 1 # wartość musi być większa od 0
-          readinessProbe:
-            failureThreshold: 3 # wartość musi być większa od 0
-            httpGet:
-              path: /healthcheck
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 60 # wartość musi być większa od 0
-            periodSeconds: 10 # wartość musi być większa od 0
-            successThreshold: 1 # wartość musi być większa od 0
-            timeoutSeconds: 1 # wartość musi być większa od 0
+           livenessProbe:
+             failureThreshold: 3 # value must be greater than 0
+             HttpGet:
+               path: / healthcheck
+               port: 8080
+               scheme: HTTP
+             initialDelaySeconds: 180 # value must be greater than 0
+             periodSeconds: 10 # value must be greater than 0
+             successThreshold: 1 # value must be greater than 0
+             timeoutSeconds: 1 # value must be greater than 0
+           readinessProbe:
+             failureThreshold: 3 # value must be greater than 0
+             HttpGet:
+               path: / healthcheck
+               port: 8080
+               scheme: HTTP
+             initialDelaySeconds: 60 # value must be greater than 0
+             periodSeconds: 10 # value must be greater than 0
+             successThreshold: 1 # value must be greater than 0
+             timeoutSeconds: 1 # value must be greater than 0
 [...]
 ```
 
-### Biblioteka
+### Library
 
 Do kontroli jest używana metoda `check` która znajduje się w bibliotece [`libraries/livenessprobe.rb`](libraries/livenessprobe.rb).
+The check method uses the `check` method found in the library [`libraries/livenessprobe.rb`](libraries/livenessprobe.rb).
 
 ```ruby
-# wywołanie metody
+# method call
 
 describe livenessprobe(container['livenessProbe']) do
   its('check') { should cmp true }
@@ -69,17 +71,17 @@ end
 
 ## parameters
 
-Kontrola `parameters` sprawdza czy szablon zawiera wymagane parametry oraz czy parametry spełniają wymagania.
+The `parameters` control checks whether the template contains the required parameters and whether the parameters meet the requirements.
 
 ```yaml
 parameters:
-  - name: PROJECT # nazwa nie może być pusta
-    description: "Name of this project" # opis nie może być pusty
+  - name: PROJECT # name can not be empty
+    description: "Name of this project" # description can not be empty
 ```
 
-### Sprawdzanie wymaganych parametrów 
+### Checking the required parameters
 
-W celu przeprowadzania kontroli czy szablon zawiera wymagany parametr, trzeba pierw nazwę takiego parametru dodać do listy w pliku [`controls/parameters.rb`](controls/parameters.rb).
+In order to check whether the template contains the required parameter, you must add the first name of the parameter to the list in the file [`controls/parameters.rb`](controls/parameters.rb).
 
 ```ruby
 # controls/parameters.rb
@@ -89,17 +91,17 @@ W celu przeprowadzania kontroli czy szablon zawiera wymagany parametr, trzeba pi
   ]
 ```
 
-W powyższym przykładzie wymagamy aby szablon zawierał parametr `PROJECT`.
+In the above example, we require the template to contain a parameter `PROJECT`.
 
-### Biblioteka
+### Library
 
-Do sprawdzenia czy wymagany parametr jest zawarty w szablonie, używana jest metoda `required_parameters` która znajduje się w klasie `ParametersTemplate`. Klasa zdefiniowana jest w pliku [`libraries/parameters.rb`](libraries/parameters.rb)
+To check whether the required parameter is included in the template, the `required_parameters` method is used which is in the `ParametersTemplate` class. The class is defined in the file [`libraries/parameters.rb`](libraries/parameters.rb)
 
 ```ruby
-# wywołanie metody
+# method call
 
-# metoda parameters jako pierwszy argument przyjmuje parametry szablonu
-# drugi argument to tablica z parametrami które są wymagane
+# method parameters as the first argument accepts template parameters
+# second argument is an array with parameters that are required
 describe parameters(template['parameters'], required_parameters) do
   its('required_parameters') { should cmp true }
 end
@@ -107,66 +109,66 @@ end
 
 ## resources
 
-Kontrola `resources` sprawdza czy kontener ma ustawione zasoby jakie wymaga do działania oraz limity. 
+The `resources` control checks whether the container has the resources it needs to run and limits.
 
 ```yaml
 [...]
           resources:
             requests:
-              memory: "0.5G" # nie może być pusta
-              cpu: "0.2" # musi być >= 0.1
-            limits:
-              memory: "0.5G" # nie może być pusta
+               memory: "0.5G" # can not be empty
+               cpu: "0.2" # must be> = 0.1
+            limits:
+               memory: "0.5G" # can not be empty
 [...]
 ```
 
 ## route
 
-Kontrola `route` sprawdza czy `Route` spełnia wymagania. Kontrola jest przeprowadzana tylko w momencie kiedy zasób znajduje się w szablonie. 
+The `route` control checks if 'Route` meets the requirements. The control is only carried out when the resource is in the template.
 
 ```yaml
-- apiVersion: v1 # musi być 'v1'
-  kind: Route
-  metadata:
-    labels:
-      app: app_name
-      area: area_name
-      stack: stack_name
-    name: app # nazwa nie moży być pusta
-  spec:
-    port:
-      targetPort: 8080-tcp # nie może być puste
-    tls:
-      termination: edge # musi być 'edge'
-    to:
-      kind: Service # musi być 'Service'
-      name: app_name # nie może być puste
-      weight: 100 # musi być > 0
-     wildcardPolicy: None
+- apiVersion: v1 # must be 'v1'
+  kind: Route
+  metadata:
+     labels:
+       app: app_name
+       area: area_name
+       stack: stack_name
+     name: app # name can not be empty
+  spec:
+     Harbor:
+       targetPort: 8080-tcp # can not be empty
+     tls:
+       termination: edge # must be 'edge'
+     to:
+       kind: Service # must be 'Service'
+       name: app_name # can not be empty
+       weight: 100 # must be> 0
+      wildcardPolicy: None
 ```
 
 ## service 
 
-Kontrola `service` sprawdza czy `Service` spełnia wymagania. Kontrola jest przeprowadzana tylko w momencie kiedy zasób znajduje się w szablonie.
+The `service` control checks whether` Service` meets the requirements. The control is only carried out when the resource is in the template.
 
 ```yaml
-- apiVersion: v1 # musi być v1
-  kind: Service
-  metadata:
-    labels:
-      app: app_name
-      stack: stack_name
-    name: app_name # nie może być puste
-  spec:
-    ports:
-    - name: 8080-tcp # nie może być puste 
-      port: 8080 # nie może być puste
-      protocol: TCP # wartość musi być /UDP|TCP/
-      targetPort: 8080 # nie może być puste
-    selector: # selector musi być zdefiniowany
-      app: app_name
-      deploymentconfig: app_name
-      stack: stack_name
-    sessionAffinity: None
-    type: ClusterIP # wartość musi spełniać warunek /ClusterIP|LoadBalancer|NodePort|ExternalName/
+- apiVersion: v1 # must be v1
+  kind: Service
+  metadata:
+     labels:
+       app: app_name
+       stack: stack_name
+     name: app_name # can not be empty
+  spec:
+     ports:
+     - name: 8080-tcp # can not be empty
+       port: 8080 # can not be empty
+       protocol: TCP # value must be / UDP | TCP /
+       targetPort: 8080 # can not be empty
+     selector: # selector must be defined
+       app: app_name
+       deploymentconfig: app_name
+       stack: stack_name
+     sessionAffinity: None
+     type: ClusterIP # value must satisfy the condition / ClusterIP | LoadBalancer | NodePort | ExternalName /
 ```
