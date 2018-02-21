@@ -46,3 +46,7 @@ Test Summary: 30 successful, 0 failures, 0 skipped
  [`service`](profile/controls/service.rb) | tests whether the `service` resource contains errors
 
 A detailed description of the InSpec profile can be found [here](profile/README.md).
+
+## Good practices
+
+[Here](CONTAINER-OS-GUIDE.md) you can find good practices, tips and tricks related to define Openshift project and run application in container. 

@@ -3,7 +3,7 @@
 This InSpec profile is used to test the application template for openshift.
 
 
-# Kontrola
+# Controls
 
 In the [control](controls) directory there are files with the control definition that is carried out on the template. Below you can find tables with the list of controls and their description.
 
