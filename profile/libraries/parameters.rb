@@ -1,5 +1,3 @@
-require 'yaml'
-
 # Custom resource based on the InSpec resource DSL
 class ParametersTemplate < Inspec.resource(1)
   name 'parameters'

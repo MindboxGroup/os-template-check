@@ -44,3 +44,5 @@ Test Summary: 30 successful, 0 failures, 0 skipped
  [`resources`](profile/controls/resources.rb) | testuje czy kontener ma ustawione zasoby jakie są wymagane przez aplikacje
  [`route`](profile/controls/route.rb) | testuje czy zasób `route` nie zawiera błędów
  [`service`](profile/controls/service.rb) | testuje czy zasób `service` nie zawiera błędów
+
+Dokładny opis profilu InSpec można znaleźć [tutaj](profile/README.md).

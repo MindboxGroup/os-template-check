@@ -1,5 +1,3 @@
-require 'yaml'
-
 # Custom resource based on the InSpec resource DSL
 class ServiceResource < Inspec.resource(1)
   name 'service_resource'
