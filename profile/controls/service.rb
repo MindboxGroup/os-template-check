@@ -11,7 +11,7 @@ control 'service' do
   template = yaml('app/template.yaml')
 
   only_if do
-    service_resource(template).exist?
+    service_resource(template).exists?
   end
 
   if template['objects']

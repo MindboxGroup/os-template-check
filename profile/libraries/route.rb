@@ -6,7 +6,7 @@ class RouteResource < Inspec.resource(1)
     @params = template
   end
 
-  def exist?
+  def exists?
     if @params['objects']
       @params['objects'].each do |obj|
         if obj['kind'] == 'Route'
