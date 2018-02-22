@@ -1,6 +1,6 @@
 # Custom resource based on the InSpec resource DSL
-class ServiceResource < Inspec.resource(1)
-  name 'service_resource'
+class DeploymentConfigResource < Inspec.resource(1)
+  name 'deploymentconfig'
 
   def initialize(template)
     @params = template
@@ -9,7 +9,7 @@ class ServiceResource < Inspec.resource(1)
   def exists?
     if @params['objects']
       @params['objects'].each do |obj|
-        if obj['kind'] == 'Service'
+        if obj['kind'] == 'DeploymentConfig'
           return true
         end
       end

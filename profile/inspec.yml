@@ -1,4 +1,7 @@
 name: openshift_template
 title: InSpec Profile
 summary: An InSpec Compliance Profile
+maintainer: Mindbox S.A.
+copyright: Mindbox S.A.
+license: Apache-2.0
 version: 0.1.0

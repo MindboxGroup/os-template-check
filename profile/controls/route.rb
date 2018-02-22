@@ -11,7 +11,7 @@ control 'route' do
   template = yaml('app/template.yaml')
 
   only_if do
-    route(template).exist?
+    route(template).exists?
   end
 
   if template['objects']
