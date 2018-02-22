@@ -15,6 +15,7 @@ In the [control](controls) directory there are files with the control definition
  [`resources`](controls/resources.rb) | tests whether the container has the resources set that are required by the applications
  [`route`](controls/route.rb) | tests whether the `route` resource contains errors
  [`service`](controls/service.rb) | tests whether the `service` resource contains errors
+ [`deploymentconfig`](controls/deploymentconfig.rb) | tests whether the `DeploymentConfig` resource contains errors
 
 ## basic
 
@@ -149,7 +150,7 @@ The `route` control checks if 'Route` meets the requirements. The control is onl
 
 ## service 
 
-The `service` control checks whether` Service` meets the requirements. The control is only carried out when the resource is in the template.
+The `service` control checks whether `Service` meets the requirements. The control is only carried out when the resource is in the template.
 
 ```yaml
 - apiVersion: v1 # must be v1
@@ -172,3 +173,7 @@ The `service` control checks whether` Service` meets the requirements. The contr
      sessionAffinity: None
      type: ClusterIP # value must satisfy the condition / ClusterIP | LoadBalancer | NodePort | ExternalName /
 ```
+
+## deploymentconfig
+
+The `deploymentconfig` control checks whether `DeploymentConfig` meets the requirements.

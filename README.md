@@ -39,11 +39,12 @@ Test Summary: 30 successful, 0 failures, 0 skipped
  Inspection name  | Description
 -----------------|-----
  [`basic`](profile/controls/basic.rb) | tests whether the given file is actually a template for openshift
- [`health_check`](profile/controls/health_check.rb) | tests whether the application container contains `livenessProbe` and` readinessProbe`
+ [`health_check`](profile/controls/health_check.rb) | tests whether the application container contains `livenessProbe` and `readinessProbe`
  [`parameters`](profile/controls/parameters.rb) | tests whether the template contains the required parameters
  [`resources`](profile/controls/resources.rb) | tests whether the container has the resources set that are required by the applications
  [`route`](profile/controls/route.rb) | tests whether the `route` resource contains errors
  [`service`](profile/controls/service.rb) | tests whether the `service` resource contains errors
+ [`deploymentconfig`](profile/controls/deploymentconfig.rb) | tests whether the `DeploymentConfig` resource contains errors
 
 A detailed description of the InSpec profile can be found [here](profile/README.md).
 
