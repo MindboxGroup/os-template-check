@@ -1,6 +1,6 @@
 # Application template
 
-The following repository contains the application template and the InSpec profile for testing the template.
+The following repository contains the application template and the InSpec profile for testing the OpenShift template.
 
 ## Application template and its testing
 
