@@ -59,8 +59,7 @@ The health_check control checks if the container contains check `livenessProbe` 
 
 ### Library
 
-Do kontroli jest używana metoda `check` która znajduje się w bibliotece [`libraries/livenessprobe.rb`](libraries/livenessprobe.rb).
-The check method uses the `check` method found in the library [`libraries/livenessprobe.rb`](libraries/livenessprobe.rb).
+The validate we use the `check` method found in the library [`libraries/livenessprobe.rb`](libraries/livenessprobe.rb).
 
 ```ruby
 # method call
