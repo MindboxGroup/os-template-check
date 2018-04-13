@@ -50,4 +50,4 @@ A detailed description of the InSpec profile can be found [here](profile/README.
 
 ## Good practices
 
-[Here](CONTAINER-OS-GUIDE.md) you can find good practices, tips and tricks related to define Openshift project and run application in container. 
+[Here](https://github.com/MindboxGroup/openshift-recommendations/blob/master/CONTAINER-OS-GUIDE.md) you can find good practices, tips and tricks related to define Openshift project and run application in container. 
